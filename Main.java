@@ -1,47 +1,28 @@
-package ru.geekbrains.java2.lesson2;
+package ru.geekbrains.java3.lesson1;
+
+import fruits.Apple;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
-
-    static int SIZE = 4;
-
     public static void main(String[] args) {
-        String [][] ABC = {
-                {"1", "2", "5", "6", "9"},
-                {"3", "4", "7", "8"},
-                {"1", "2", "5", "6"},
-                {"3", "4", "7", "8"},
-        };
-        try {
-            System.out.print(sum (ABC));
-        } catch (MyArraySizeException m) {
-            m.printStackTrace();
-        } catch (MyArrayDataException m) {
-            m.printStackTrace();
-            System.out.println(m.getRow () + " " + m.getCol ());
-            System.out.println( ABC [m.getRow ()] [m.getCol ()]);
-        }
+        String [] arr = {"ptk", "rhf", "cby"};
+        ArrayList <String> al = arrayToList (arr);
+        System.out.println(al);
+
+        BoxWithFruits <Apple> box1 = new BoxWithFruits<> ();
+        box1.add (new Apple());
     }
 
-    static int sum (String [][] ABC) throws  MyArrayDataException, MyArraySizeException {
-        if (ABC.length != SIZE) {
-            throw new MyArraySizeException();
-        }
-        for (int i = 0; i < ABC.length; i++) {
-            if (ABC[i].length != SIZE) {
-                throw new MyArraySizeException();
-            }
-        }
-        int sum = 0;
-        for (int i = 0; i < ABC.length; i++) {
-            for (int j = 0; j < ABC.length; j++) {
-                try {
-                    sum += Integer.parseInt (ABC [i][j]);
-                } catch (NumberFormatException m) {
-                    throw new MyArrayDataException ("format" + i + " " + j, i, j);
-                }
-            }
-        }
-        return sum;
+    public static <T> ArrayList <T> arrayToList (T[] arr) {return new ArrayList<>(Arrays.asList(arr));}
+
+    public static  <T> void swap1 (T[] arr, int index1, int index2) {
+        T obj = arr [index1];
+        arr[index1] = arr [index2];
+        arr[index1] = obj;
+
     }
 
 }
